@@ -33,7 +33,7 @@ Resources:
             Path: /customers
             Method: POST
       Policies:
-        - DynamoBDCrudPolicy:
+        - DynamoDBCrudPolicy:
             TableName: !Ref CustomersTable
   ReadCustomerFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -41,13 +41,13 @@ Resources:
       CodeUri: customer_api/
       Handler: read.lambda_handler
       Events:
-        CreateCustomers:
+        ReadCustomers:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /customers/{id}
             Method: GET
       Policies:
-        - DynamoBDReadPolicy:
+        - DynamoDBReadPolicy:
             TableName: !Ref CustomersTable
 
 
